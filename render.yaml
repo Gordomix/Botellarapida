@@ -1,0 +1,70 @@
+# ==========================================================================
+# Blueprint de despliegue — Botella Rápida en Render (plan GRATIS, sin tarjeta)
+# -------------------------------------------------------------------------
+# Qué hace este fichero: al conectar tu repositorio en Render (opción
+# "Blueprint"), Render CREA SOLO el servicio Web con todo configurado:
+#   - Runtime Node (usa el .nvmrc → Node 22)
+#   - Comandos de build y arranque correctos
+#   - HTTPS automático y subdominio *.onrender.com
+#   - Variables fijas (NODE_ENV, HOST, MYSQL_SSL, NO_INDEX, MYSQL_DATABASE…)
+#
+# Lo único que TÚ rellenas al aplicar el Blueprint (Render te lo pregunta en
+# pantalla, porque son secretos que no van en el código):
+#   - MYSQL_HOST, MYSQL_USER, MYSQL_PASSWORD  → los copias de TiDB Cloud
+#   - ADMIN_PASSWORD                           → la contraseña de tu admin (8+)
+#
+# Pasos resumidos:
+#   1) Sube el proyecto a un repo PRIVATE de GitHub.
+#   2) Crea la base de datos gratis en TiDB Cloud (Serverless) y copia Host /
+#      User / Password. La base `defaultdb` ya existe; tu app solo creará las
+#      tablas al arrancar.
+#   3) En Render: New → Blueprint → conecta el repo → Render lee ESTE fichero →
+#      pega los 4 secretos que te pide → Create → Deploy.
+#   4) Abre la URL que te da Render y entra por /login/admin.
+# ==========================================================================
+services:
+  - type: web
+    name: botella-rapida
+    runtime: node
+    plan: free
+    # Misma región que tu TiDB reduce latencia; si tu TiDB es de otra región,
+    # cambia este valor (oregon | ohio | frankfurt | singapore).
+    region: frankfurt
+    # vite/nitro/typescript están en "dependencies", así que --omit=dev no
+    # rompe el build. Si un día el build se quejara de una herramienta que
+    # falta, sustitúyelo por: npm ci && npm run build:app
+    buildCommand: npm ci --omit=dev && npm run build:app
+    startCommand: node .output/server/index.mjs
+    healthCheckPath: /
+    autoDeploy: true
+    envVars:
+      # --- Fijas (ya configuradas, no tocar) ---
+      - key: NODE_ENV
+        value: production
+      - key: HOST
+        value: 0.0.0.0
+      # NO se declara PORT: Render lo inyecta solo y Nitro lo respeta.
+      - key: MYSQL_PORT
+        value: "3306"
+      - key: MYSQL_DATABASE
+        value: defaultdb
+      - key: MYSQL_SSL
+        value: "1" # TiDB exige conexión cifrada (TLS)
+      - key: NO_INDEX
+        value: "1" # beta privada: los buscadores no te encuentran
+      - key: ADMIN_EMAIL
+        value: botellarapidadmin@gmail.com
+
+      # --- Secretos: Render te pedirá el valor al aplicar el Blueprint ---
+      - key: MYSQL_HOST
+        sync: false
+      - key: MYSQL_USER
+        sync: false
+      - key: MYSQL_PASSWORD
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
+
+      # --- Opcional (para recuperación por email cuando haya SMTP) ---
+      - key: PUBLIC_APP_URL
+        sync: false

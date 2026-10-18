@@ -1,0 +1,19 @@
+{
+  "name": "Botella Rápida",
+  "short_name": "Botella Rápida",
+  "description": "Ultramarinos de barrio con reparto express: snacks, bebidas y caprichos en menos de 30 minutos.",
+  "id": "/",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "lang": "es",
+  "background_color": "#12100E",
+  "theme_color": "#12100E",
+  "categories": ["shopping", "food", "grocery"],
+  "icons": [
+    { "src": "/brand/icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/brand/icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/brand/icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
