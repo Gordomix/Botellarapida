@@ -1,8 +1,7 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { type FormEvent, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { AuthLayout, GoogleSignInButton } from "@/components/auth/gate";
-import { mergeSection, SITE_DEFAULTS, type PortalesSection } from "@/data/site-defaults";
+import { AuthLayout } from "@/components/auth/gate";
 import { useBr } from "@/lib/use-br";
 
 export const Route = createFileRoute("/registro/cliente")({ component: Page });
@@ -11,21 +10,6 @@ function Page() {
   const br = useBr();
   const navigate = useNavigate();
   const [err, setErr] = useState("");
-  // El admin puede cerrar las altas de cliente desde el panel («Ajustes»).
-  const portales = mergeSection(SITE_DEFAULTS.portales, br.content.portales as PortalesSection);
-
-  if (!portales.registroCliente) {
-    return (
-      <AuthLayout title="Altas cerradas" sub="El registro de clientes está temporalmente cerrado.">
-        <p className="text-sm text-muted">Si ya tienes cuenta, puedes entrar igual.</p>
-        <p className="mt-4 text-center text-sm text-muted">
-          <Link to="/login/cliente" search={{ next: undefined }} className="font-medium text-ember">
-            Entrar
-          </Link>
-        </p>
-      </AuthLayout>
-    );
-  }
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -49,13 +33,10 @@ function Page() {
       setErr(res.msg);
       return;
     }
-    // Alta en MySQL; si el correo no exige confirmación (sin SMTP, p. ej. local)
-    // entramos con la misma cuenta para tener sesión ya. Si el login falla
-    // (falta confirmar el correo, etc.) se muestra el aviso de `registerUser`.
+    // Alta en MySQL; entramos con la misma cuenta para tener sesión (token) ya.
     const logged = await br.login({ email, pass }).catch(() => null);
     if (!logged?.ok) {
-      setErr(res.msg || "Cuenta creada. Entra desde «Entrar» cuando puedas.");
-      void navigate({ to: "/login/cliente", search: { next: undefined } });
+      setErr("Cuenta creada, pero no se pudo entrar. Inténtalo desde Entrar.");
       return;
     }
     void navigate({ to: "/cuenta" });
@@ -63,8 +44,6 @@ function Page() {
 
   return (
     <AuthLayout title="Crear cuenta" sub="Un nombre, un email, y a picar.">
-      {/* Alta clásica por contraseña, como siempre; Google queda debajo como
-          opción rápida para quien prefiera entrar con su cuenta de Google. */}
       <form onSubmit={onSubmit} className="space-y-3">
         <In name="name" label="Nombre" autoComplete="name" />
         <In name="email" label="Email" type="email" autoComplete="email" />
@@ -74,7 +53,6 @@ function Page() {
           {br.registerPending ? "Creando…" : "Crear cuenta"}
         </Button>
       </form>
-      <GoogleSignInButton role="user" next="/cuenta" divider="o bien creala con Google" />
       <p className="mt-4 text-center text-sm text-muted">
         ¿Ya tienes cuenta?{" "}
         <Link to="/login/cliente" search={{ next: undefined }} className="font-medium text-ember">

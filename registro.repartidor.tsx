@@ -2,7 +2,6 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { type FormEvent, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { AuthLayout } from "@/components/auth/gate";
-import { mergeSection, SITE_DEFAULTS, type PortalesSection } from "@/data/site-defaults";
 import { useBr } from "@/lib/use-br";
 
 export const Route = createFileRoute("/registro/repartidor")({ component: Page });
@@ -11,8 +10,6 @@ function Page() {
   const br = useBr();
   const [msg, setMsg] = useState("");
   const [ok, setOk] = useState(false);
-  // El admin puede cerrar las altas de repartidor desde el panel («Ajustes»).
-  const portales = mergeSection(SITE_DEFAULTS.portales, br.content.portales as PortalesSection);
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -25,7 +22,6 @@ function Page() {
         pass: String(fd.get("pass")),
         role: "repartidor",
         dni: String(fd.get("dni")),
-        phone: String(fd.get("phone")),
         vehicle: String(fd.get("vehicle")) as
           | "patinete"
           | "bici"
@@ -41,22 +37,6 @@ function Page() {
     setMsg(res.msg);
   }
 
-  if (!portales.registroRepartidor) {
-    return (
-      <AuthLayout title="Altas cerradas" sub="El reparto no admite nuevas solicitudes ahora mismo.">
-        <p className="text-sm text-muted">
-          Estamos al completo. Vuelve pronto o entra si ya tienes cuenta.
-        </p>
-        <p className="mt-4 text-center text-sm text-muted">
-          ¿Ya te aprobaron?{" "}
-          <Link to="/login/repartidor" search={{ next: undefined }} className="font-medium text-ember">
-            Entrar
-          </Link>
-        </p>
-      </AuthLayout>
-    );
-  }
-
   return (
     <AuthLayout title="Solicitar plaza" sub="DNI y medio de reparto. El admin revisa la solicitud.">
       {ok ? (
@@ -67,7 +47,6 @@ function Page() {
           <In name="email" label="Email" type="email" />
           <In name="pass" label="Contraseña" type="password" />
           <In name="dni" label="DNI" />
-          <In name="phone" label="Teléfono" type="tel" />
           <label className="block">
             <span className="mb-1.5 block text-sm font-medium">Medio</span>
             <select

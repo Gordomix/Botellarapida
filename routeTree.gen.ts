@@ -13,28 +13,17 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AccesoRouteImport } from './routes/acceso'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as CatalogoRouteImport } from './routes/catalogo'
-import { Route as ChapasRouteImport } from './routes/chapas'
 import { Route as CuentaRouteImport } from './routes/cuenta'
-import { Route as GraciasRouteImport } from './routes/gracias'
-import { Route as HealthRouteImport } from './routes/health'
-import { Route as MensajesRouteImport } from './routes/mensajes'
-import { Route as PagoDemoRouteImport } from './routes/pago-demo'
 import { Route as PrivacidadRouteImport } from './routes/privacidad'
-import { Route as RecuperarRouteImport } from './routes/recuperar'
 import { Route as RepartidorRouteImport } from './routes/repartidor'
-import { Route as RestablecerRouteImport } from './routes/restablecer'
 import { Route as SoporteRouteImport } from './routes/soporte'
-import { Route as SorteoRouteImport } from './routes/sorteo'
 import { Route as TerminosRouteImport } from './routes/terminos'
-import { Route as VerificarRouteImport } from './routes/verificar'
-import { Route as AfiliadoCodeRouteImport } from './routes/afiliado.$code'
 import { Route as LoginAdminRouteImport } from './routes/login.admin'
 import { Route as LoginClienteRouteImport } from './routes/login.cliente'
 import { Route as LoginRepartidorRouteImport } from './routes/login.repartidor'
 import { Route as ProductoIdRouteImport } from './routes/producto.$id'
 import { Route as RegistroClienteRouteImport } from './routes/registro.cliente'
 import { Route as RegistroRepartidorRouteImport } from './routes/registro.repartidor'
-import { Route as SeguimientoCodeRouteImport } from './routes/seguimiento.$code'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -56,34 +45,9 @@ const CatalogoRoute = CatalogoRouteImport.update({
   path: '/catalogo',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ChapasRoute = ChapasRouteImport.update({
-  id: '/chapas',
-  path: '/chapas',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const CuentaRoute = CuentaRouteImport.update({
   id: '/cuenta',
   path: '/cuenta',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const GraciasRoute = GraciasRouteImport.update({
-  id: '/gracias',
-  path: '/gracias',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const HealthRoute = HealthRouteImport.update({
-  id: '/health',
-  path: '/health',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const MensajesRoute = MensajesRouteImport.update({
-  id: '/mensajes',
-  path: '/mensajes',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PagoDemoRoute = PagoDemoRouteImport.update({
-  id: '/pago-demo',
-  path: '/pago-demo',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PrivacidadRoute = PrivacidadRouteImport.update({
@@ -91,19 +55,9 @@ const PrivacidadRoute = PrivacidadRouteImport.update({
   path: '/privacidad',
   getParentRoute: () => rootRouteImport,
 } as any)
-const RecuperarRoute = RecuperarRouteImport.update({
-  id: '/recuperar',
-  path: '/recuperar',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const RepartidorRoute = RepartidorRouteImport.update({
   id: '/repartidor',
   path: '/repartidor',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const RestablecerRoute = RestablecerRouteImport.update({
-  id: '/restablecer',
-  path: '/restablecer',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SoporteRoute = SoporteRouteImport.update({
@@ -111,24 +65,9 @@ const SoporteRoute = SoporteRouteImport.update({
   path: '/soporte',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SorteoRoute = SorteoRouteImport.update({
-  id: '/sorteo',
-  path: '/sorteo',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const TerminosRoute = TerminosRouteImport.update({
   id: '/terminos',
   path: '/terminos',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const VerificarRoute = VerificarRouteImport.update({
-  id: '/verificar',
-  path: '/verificar',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AfiliadoCodeRoute = AfiliadoCodeRouteImport.update({
-  id: '/afiliado/$code',
-  path: '/afiliado/$code',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginAdminRoute = LoginAdminRouteImport.update({
@@ -161,67 +100,40 @@ const RegistroRepartidorRoute = RegistroRepartidorRouteImport.update({
   path: '/registro/repartidor',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SeguimientoCodeRoute = SeguimientoCodeRouteImport.update({
-  id: '/seguimiento/$code',
-  path: '/seguimiento/$code',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/acceso': typeof AccesoRoute
   '/admin': typeof AdminRoute
   '/catalogo': typeof CatalogoRoute
-  '/chapas': typeof ChapasRoute
   '/cuenta': typeof CuentaRoute
-  '/gracias': typeof GraciasRoute
-  '/health': typeof HealthRoute
-  '/mensajes': typeof MensajesRoute
-  '/pago-demo': typeof PagoDemoRoute
   '/privacidad': typeof PrivacidadRoute
-  '/recuperar': typeof RecuperarRoute
   '/repartidor': typeof RepartidorRoute
-  '/restablecer': typeof RestablecerRoute
   '/soporte': typeof SoporteRoute
-  '/sorteo': typeof SorteoRoute
   '/terminos': typeof TerminosRoute
-  '/verificar': typeof VerificarRoute
-  '/afiliado/$code': typeof AfiliadoCodeRoute
   '/login/admin': typeof LoginAdminRoute
   '/login/cliente': typeof LoginClienteRoute
   '/login/repartidor': typeof LoginRepartidorRoute
   '/producto/$id': typeof ProductoIdRoute
   '/registro/cliente': typeof RegistroClienteRoute
   '/registro/repartidor': typeof RegistroRepartidorRoute
-  '/seguimiento/$code': typeof SeguimientoCodeRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/acceso': typeof AccesoRoute
   '/admin': typeof AdminRoute
   '/catalogo': typeof CatalogoRoute
-  '/chapas': typeof ChapasRoute
   '/cuenta': typeof CuentaRoute
-  '/gracias': typeof GraciasRoute
-  '/health': typeof HealthRoute
-  '/mensajes': typeof MensajesRoute
-  '/pago-demo': typeof PagoDemoRoute
   '/privacidad': typeof PrivacidadRoute
-  '/recuperar': typeof RecuperarRoute
   '/repartidor': typeof RepartidorRoute
-  '/restablecer': typeof RestablecerRoute
   '/soporte': typeof SoporteRoute
-  '/sorteo': typeof SorteoRoute
   '/terminos': typeof TerminosRoute
-  '/verificar': typeof VerificarRoute
-  '/afiliado/$code': typeof AfiliadoCodeRoute
   '/login/admin': typeof LoginAdminRoute
   '/login/cliente': typeof LoginClienteRoute
   '/login/repartidor': typeof LoginRepartidorRoute
   '/producto/$id': typeof ProductoIdRoute
   '/registro/cliente': typeof RegistroClienteRoute
   '/registro/repartidor': typeof RegistroRepartidorRoute
-  '/seguimiento/$code': typeof SeguimientoCodeRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -229,28 +141,17 @@ export interface FileRoutesById {
   '/acceso': typeof AccesoRoute
   '/admin': typeof AdminRoute
   '/catalogo': typeof CatalogoRoute
-  '/chapas': typeof ChapasRoute
   '/cuenta': typeof CuentaRoute
-  '/gracias': typeof GraciasRoute
-  '/health': typeof HealthRoute
-  '/mensajes': typeof MensajesRoute
-  '/pago-demo': typeof PagoDemoRoute
   '/privacidad': typeof PrivacidadRoute
-  '/recuperar': typeof RecuperarRoute
   '/repartidor': typeof RepartidorRoute
-  '/restablecer': typeof RestablecerRoute
   '/soporte': typeof SoporteRoute
-  '/sorteo': typeof SorteoRoute
   '/terminos': typeof TerminosRoute
-  '/verificar': typeof VerificarRoute
-  '/afiliado/$code': typeof AfiliadoCodeRoute
   '/login/admin': typeof LoginAdminRoute
   '/login/cliente': typeof LoginClienteRoute
   '/login/repartidor': typeof LoginRepartidorRoute
   '/producto/$id': typeof ProductoIdRoute
   '/registro/cliente': typeof RegistroClienteRoute
   '/registro/repartidor': typeof RegistroRepartidorRoute
-  '/seguimiento/$code': typeof SeguimientoCodeRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -259,84 +160,51 @@ export interface FileRouteTypes {
     | '/acceso'
     | '/admin'
     | '/catalogo'
-    | '/chapas'
     | '/cuenta'
-    | '/gracias'
-    | '/health'
-    | '/mensajes'
-    | '/pago-demo'
     | '/privacidad'
-    | '/recuperar'
     | '/repartidor'
-    | '/restablecer'
     | '/soporte'
-    | '/sorteo'
     | '/terminos'
-    | '/verificar'
-    | '/afiliado/$code'
     | '/login/admin'
     | '/login/cliente'
     | '/login/repartidor'
     | '/producto/$id'
     | '/registro/cliente'
     | '/registro/repartidor'
-    | '/seguimiento/$code'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/acceso'
     | '/admin'
     | '/catalogo'
-    | '/chapas'
     | '/cuenta'
-    | '/gracias'
-    | '/health'
-    | '/mensajes'
-    | '/pago-demo'
     | '/privacidad'
-    | '/recuperar'
     | '/repartidor'
-    | '/restablecer'
     | '/soporte'
-    | '/sorteo'
     | '/terminos'
-    | '/verificar'
-    | '/afiliado/$code'
     | '/login/admin'
     | '/login/cliente'
     | '/login/repartidor'
     | '/producto/$id'
     | '/registro/cliente'
     | '/registro/repartidor'
-    | '/seguimiento/$code'
   id:
     | '__root__'
     | '/'
     | '/acceso'
     | '/admin'
     | '/catalogo'
-    | '/chapas'
     | '/cuenta'
-    | '/gracias'
-    | '/health'
-    | '/mensajes'
-    | '/pago-demo'
     | '/privacidad'
-    | '/recuperar'
     | '/repartidor'
-    | '/restablecer'
     | '/soporte'
-    | '/sorteo'
     | '/terminos'
-    | '/verificar'
-    | '/afiliado/$code'
     | '/login/admin'
     | '/login/cliente'
     | '/login/repartidor'
     | '/producto/$id'
     | '/registro/cliente'
     | '/registro/repartidor'
-    | '/seguimiento/$code'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -344,28 +212,17 @@ export interface RootRouteChildren {
   AccesoRoute: typeof AccesoRoute
   AdminRoute: typeof AdminRoute
   CatalogoRoute: typeof CatalogoRoute
-  ChapasRoute: typeof ChapasRoute
   CuentaRoute: typeof CuentaRoute
-  GraciasRoute: typeof GraciasRoute
-  HealthRoute: typeof HealthRoute
-  MensajesRoute: typeof MensajesRoute
-  PagoDemoRoute: typeof PagoDemoRoute
   PrivacidadRoute: typeof PrivacidadRoute
-  RecuperarRoute: typeof RecuperarRoute
   RepartidorRoute: typeof RepartidorRoute
-  RestablecerRoute: typeof RestablecerRoute
   SoporteRoute: typeof SoporteRoute
-  SorteoRoute: typeof SorteoRoute
   TerminosRoute: typeof TerminosRoute
-  VerificarRoute: typeof VerificarRoute
-  AfiliadoCodeRoute: typeof AfiliadoCodeRoute
   LoginAdminRoute: typeof LoginAdminRoute
   LoginClienteRoute: typeof LoginClienteRoute
   LoginRepartidorRoute: typeof LoginRepartidorRoute
   ProductoIdRoute: typeof ProductoIdRoute
   RegistroClienteRoute: typeof RegistroClienteRoute
   RegistroRepartidorRoute: typeof RegistroRepartidorRoute
-  SeguimientoCodeRoute: typeof SeguimientoCodeRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -398,46 +255,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CatalogoRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/chapas': {
-      id: '/chapas'
-      path: '/chapas'
-      fullPath: '/chapas'
-      preLoaderRoute: typeof ChapasRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/cuenta': {
       id: '/cuenta'
       path: '/cuenta'
       fullPath: '/cuenta'
       preLoaderRoute: typeof CuentaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/gracias': {
-      id: '/gracias'
-      path: '/gracias'
-      fullPath: '/gracias'
-      preLoaderRoute: typeof GraciasRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/health': {
-      id: '/health'
-      path: '/health'
-      fullPath: '/health'
-      preLoaderRoute: typeof HealthRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/mensajes': {
-      id: '/mensajes'
-      path: '/mensajes'
-      fullPath: '/mensajes'
-      preLoaderRoute: typeof MensajesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/pago-demo': {
-      id: '/pago-demo'
-      path: '/pago-demo'
-      fullPath: '/pago-demo'
-      preLoaderRoute: typeof PagoDemoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/privacidad': {
@@ -447,25 +269,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PrivacidadRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/recuperar': {
-      id: '/recuperar'
-      path: '/recuperar'
-      fullPath: '/recuperar'
-      preLoaderRoute: typeof RecuperarRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/repartidor': {
       id: '/repartidor'
       path: '/repartidor'
       fullPath: '/repartidor'
       preLoaderRoute: typeof RepartidorRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/restablecer': {
-      id: '/restablecer'
-      path: '/restablecer'
-      fullPath: '/restablecer'
-      preLoaderRoute: typeof RestablecerRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/soporte': {
@@ -475,32 +283,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SoporteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/sorteo': {
-      id: '/sorteo'
-      path: '/sorteo'
-      fullPath: '/sorteo'
-      preLoaderRoute: typeof SorteoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/terminos': {
       id: '/terminos'
       path: '/terminos'
       fullPath: '/terminos'
       preLoaderRoute: typeof TerminosRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/verificar': {
-      id: '/verificar'
-      path: '/verificar'
-      fullPath: '/verificar'
-      preLoaderRoute: typeof VerificarRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/afiliado/$code': {
-      id: '/afiliado/$code'
-      path: '/afiliado/$code'
-      fullPath: '/afiliado/$code'
-      preLoaderRoute: typeof AfiliadoCodeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login/admin': {
@@ -545,13 +332,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RegistroRepartidorRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/seguimiento/$code': {
-      id: '/seguimiento/$code'
-      path: '/seguimiento/$code'
-      fullPath: '/seguimiento/$code'
-      preLoaderRoute: typeof SeguimientoCodeRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
@@ -560,28 +340,17 @@ const rootRouteChildren: RootRouteChildren = {
   AccesoRoute: AccesoRoute,
   AdminRoute: AdminRoute,
   CatalogoRoute: CatalogoRoute,
-  ChapasRoute: ChapasRoute,
   CuentaRoute: CuentaRoute,
-  GraciasRoute: GraciasRoute,
-  HealthRoute: HealthRoute,
-  MensajesRoute: MensajesRoute,
-  PagoDemoRoute: PagoDemoRoute,
   PrivacidadRoute: PrivacidadRoute,
-  RecuperarRoute: RecuperarRoute,
   RepartidorRoute: RepartidorRoute,
-  RestablecerRoute: RestablecerRoute,
   SoporteRoute: SoporteRoute,
-  SorteoRoute: SorteoRoute,
   TerminosRoute: TerminosRoute,
-  VerificarRoute: VerificarRoute,
-  AfiliadoCodeRoute: AfiliadoCodeRoute,
   LoginAdminRoute: LoginAdminRoute,
   LoginClienteRoute: LoginClienteRoute,
   LoginRepartidorRoute: LoginRepartidorRoute,
   ProductoIdRoute: ProductoIdRoute,
   RegistroClienteRoute: RegistroClienteRoute,
   RegistroRepartidorRoute: RegistroRepartidorRoute,
-  SeguimientoCodeRoute: SeguimientoCodeRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

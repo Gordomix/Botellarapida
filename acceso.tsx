@@ -1,8 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Headset, Shield, Store, Truck } from "lucide-react";
 import { StoreShell } from "@/components/layout/store-shell";
-import { mergeSection, SITE_DEFAULTS, type PortalesSection } from "@/data/site-defaults";
-import { useBr } from "@/lib/use-br";
 
 export const Route = createFileRoute("/acceso")({ component: Acceso });
 
@@ -11,8 +9,8 @@ const ZONES = [
     to: "/login/cliente" as const,
     icon: Store,
     title: "Clientes",
-    text: "Entra con Google en un clic: sin contraseñas y con el correo verificado.",
-    cta: "Entrar con Google",
+    text: "Entra o crea cuenta para comprar y seguir tus pedidos.",
+    cta: "Entrar como cliente",
     img: "/brand/slides/terraza.jpg",
   },
   {
@@ -41,20 +39,7 @@ const ZONES = [
   },
 ];
 
-// Atajo personalizado: si ya has entrado, te lleva directemente a tu área
-// (antes había que rebuscar entre las cuatro tarjetas de acceso).
-const MY_AREA: Record<string, { to: string; label: string; text: string }> = {
-  user: { to: "/cuenta", label: "Ir a mi cuenta", text: "Pedidos, chats con tu repartidor y facturas." },
-  courier: { to: "/repartidor", label: "Ir a mi portal", text: "Repartos asignados y avisos." },
-  admin: { to: "/admin", label: "Ir al panel", text: "Pedidos, catálogo, tienda y mensajes." },
-};
-
 function Acceso() {
-  const br = useBr();
-  const area = br.session ? MY_AREA[br.session.role] : undefined;
-  // El admin puede cerrar el buzón de soporte: entonces no se ofrece la puerta.
-  const portales = mergeSection(SITE_DEFAULTS.portales, br.content.portales as PortalesSection);
-  const zones = ZONES.filter((z) => z.to !== "/soporte" || portales.soporte);
   return (
     <StoreShell>
       <section className="relative min-h-72 overflow-hidden sm:min-h-80">
@@ -71,24 +56,8 @@ function Acceso() {
         </div>
       </section>
       <div className="mx-auto max-w-6xl px-4 py-10">
-        {area ? (
-          <Link
-            to={area.to as never}
-            className="mb-6 flex flex-wrap items-center justify-between gap-3 rounded-[1.5rem] bg-surface p-6 text-ink shadow-card transition-transform hover:-translate-y-0.5 hover:shadow-lift"
-          >
-            <span>
-              <span className="block font-display text-xl font-semibold text-ink">
-                Hola, {br.session?.name.split(" ")[0]}
-              </span>
-              <span className="mt-1 block text-sm text-muted">{area.text}</span>
-            </span>
-            <span className="rounded-full bg-ember px-4 py-2 text-sm font-semibold text-paper">
-              {area.label}
-            </span>
-          </Link>
-        ) : null}
         <div className="grid gap-4 sm:grid-cols-2">
-          {zones.map((z) => (
+          {ZONES.map((z) => (
             <Link
               key={z.title}
               to={z.to}
@@ -106,6 +75,11 @@ function Acceso() {
             </Link>
           ))}
         </div>
+        <p className="mt-10 rounded-2xl bg-ink px-4 py-3 text-xs text-mist">
+          Cuentas creadas con el seed: cliente@demo.es / demo1234 · demo@repartidor.br / demo1234.
+          El admin es el ADMIN_EMAIL y ADMIN_PASSWORD que definiste en tu .env (en local,
+          admin@local.dev / admin12345).
+        </p>
       </div>
     </StoreShell>
   );
